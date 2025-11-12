@@ -8,7 +8,65 @@
   /* Latar belakang terinspirasi dari tekstur di gambar */
   --light-bg: #FDF8E1; 
 }
+/* --- Perbaikan Peringatan GSheet --- */
+.gsheet-warning {
+  background-color: #fffaf0; /* Warna kuning gading/pucat */
+  border: 1px solid var(--primary-orange);
+  border-radius: 8px;
+  /* DIUBAH: Padding disesuaikan */
+  padding: 16px 24px;
+  margin-top: 20px;
+  /* DIUBAH: Teks rata kiri */
+  text-align: left;
+  font-size: 0.9rem; /* Sedikit diperbesar agar mudah dibaca */
+  color: var(--dark-text);
+  line-height: 1.6;
+}
 
+.gsheet-warning h3 {
+  color: var(--primary-red);
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.gsheet-warning p {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.gsheet-warning ol {
+  /* DIUBAH: Padding diatur agar nomor masuk ke dalam */
+  padding-left: 20px; 
+  /* DIUBAH: Memastikan list-style ada di dalam padding */
+  list-style-position: inside; 
+  margin: 0;
+}
+
+.gsheet-warning li {
+  margin-bottom: 8px; /* Sedikit ditambah jarak antar list */
+}
+
+.gsheet-warning code {
+  background-color: #f0f0f0;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: #c7254e; /* Warna merah untuk kode */
+}
+
+/* Penyesuaian responsif untuk peringatan di layar kecil */
+@media (max-width: 400px) {
+  .gsheet-warning {
+    padding: 15px;
+    font-size: 0.85rem;
+  }
+  .gsheet-warning h3 {
+    font-size: 1rem;
+  }
+}
 /* Reset dan Font Dasar */
 body {
   font-family: 'Inter', sans-serif;
@@ -18,14 +76,17 @@ body {
   padding: 20px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start; /* Diubah dari center agar tidak aneh di layar tinggi */
   min-height: 100vh;
 }
 
 .App {
   text-align: center;
   width: 100%;
-  max-width: 500px;
+  /* DIUBAH: Dibuat lebih lebar untuk tampilan website */
+  max-width: 900px; 
+  /* Penambahan margin auto untuk desktop */
+  margin: 20px auto; 
 }
 
 .container {
@@ -138,23 +199,39 @@ h1 {
   opacity: 0.3;
 }
 
-/* Animasi Shuffle */
-.deck.shuffling .card-placeholder:nth-child(1) { animation: shuffle-1 0.5s infinite alternate; }
-.deck.shuffling .card-placeholder:nth-child(2) { animation: shuffle-2 0.5s infinite alternate-reverse; }
-.deck.shuffling .card-placeholder:nth-child(3) { animation: shuffle-3 0.5s infinite; }
+/* === Animasi Shuffle BARU (Jitter/Getar Cepat) === */
+/* Hapus keyframes shuffle-1, shuffle-2, shuffle-3 yang lama */
 
-@keyframes shuffle-1 {
-  from { transform: translate(-10px, -5px) rotate(-10deg); }
-  to   { transform: translate(10px, 5px) rotate(10deg); }
+.deck.shuffling .card-placeholder {
+  animation-duration: 0.1s; /* Sangat cepat */
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
 }
-@keyframes shuffle-2 {
-  from { transform: translate(5px, 5px) rotate(8deg); }
-  to   { transform: translate(-5px, -5px) rotate(-8deg); }
+.deck.shuffling .card-placeholder:nth-child(1) {
+  animation-name: jitter-1;
 }
-@keyframes shuffle-3 {
-  from { transform: translate(-8px, 2px) rotate(-5deg); }
-  to   { transform: translate(8px, -2px) rotate(5deg); }
+.deck.shuffling .card-placeholder:nth-child(2) {
+  animation-name: jitter-2;
+  animation-delay: 0.02s; /* Sedikit delay agar tidak sinkron */
 }
+.deck.shuffling .card-placeholder:nth-child(3) {
+  animation-name: jitter-3;
+  animation-delay: 0.04s;
+}
+
+@keyframes jitter-1 {
+  0%, 100% { transform: translate(0, 0) rotate(-5deg); }
+  50% { transform: translate(2px, -1px) rotate(-4deg); }
+}
+@keyframes jitter-2 {
+  0%, 100% { transform: translate(0, 0) rotate(3deg); }
+  50% { transform: translate(-2px, 1px) rotate(5deg); }
+}
+@keyframes jitter-3 {
+  0%, 100% { transform: translate(0, 0) rotate(-2deg); }
+  50% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+/* === Akhir Animasi Shuffle BARU === */
 
 
 /* Popup Modal */
@@ -170,6 +247,7 @@ h1 {
   align-items: center;
   /* Animasi fade-in untuk overlay */
   animation: fadeIn 0.3s;
+  z-index: 100; /* Pastikan di atas segalanya */
 }
 
 .popup-content {
@@ -280,25 +358,6 @@ h1 {
   padding: 20px 0;
 }
 
-.refresh-button {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 700;
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: none;
-  background-color: #f0f0f0;
-  color: #555;
-  cursor: pointer;
-  margin-top: -10px;
-  margin-bottom: 20px;
-  transition: background-color 0.2s;
-}
-
-.refresh-button:hover {
-  background-color: #e0e0e0;
-}
-
 /* --- Tambahan untuk Input GSheet --- */
 
 /* Beri style pada section GSheet agar mirip Excel */
@@ -331,3 +390,4 @@ h1 {
 .refresh-button {
   display: none;
 }
+

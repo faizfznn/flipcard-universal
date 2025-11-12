@@ -1,5 +1,5 @@
 // Impor yang diperlukan (XLSX kembali aktif)
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import * as XLSX from 'xlsx'; 
 import './App.css'; 
 
@@ -154,6 +154,23 @@ function App() {
             </button>
           </div>
         </div>
+
+        {/* === AWAL TAMBAHAN PERINGATAN === */}
+        <div className="gsheet-warning">
+          <h3>Peringatan Penting (Google Sheet)</h3>
+          <p>Agar fitur "Muat dari GSheet" berfungsi untuk publik (orang lain), mereka wajib:</p>
+          <ol>
+            <li>Data GSheet harus ada di <strong>Kolom A</strong>.</li>
+            <li>Membuat <strong>Apps Script</strong> di Google Sheet mereka.</li>
+            <li>Pastikan runtime <strong>V8</strong> aktif di Apps Script.</li>
+            <li>Salin kode <code>doGet</code> & <code>doOptions</code> (termasuk <code>.setHeader()</code> untuk CORS) ke script mereka.</li>
+            <li><strong>Deploy</strong> sebagai Web App.</li>
+            <li>Atur izin "Who has access" ke <strong>"Anyone"</strong>.</li>
+            <li>URL Web App hasil deploy adalah yang ditempelkan di atas.</li>
+          </ol>
+        </div>
+        {/* === AKHIR TAMBAHAN PERINGATAN === */}
+
 
         {/* DIKEMBALIKAN: Bagian Excel */}
         <div className="import-section">

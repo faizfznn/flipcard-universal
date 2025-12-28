@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+---
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Web Kartu Acak (Card Shuffle)
 
-## Available Scripts
+**Web Kartu Acak** adalah aplikasi berbasis web yang memungkinkan pengguna untuk mengelola dan mengambil kartu secara acak dari sebuah dek. Aplikasi ini dirancang agar fleksibel, di mana data kartu dapat diimpor dari berbagai sumber seperti Google Sheets, file Excel, maupun ditambahkan secara manual.
 
-In the project directory, you can run:
+## Fitur Utama
 
-### `npm start`
+* **Integrasi Google Sheets**: Mengambil data kartu secara dinamis langsung dari Google Sheets melalui URL Web App.
+* **Impor File Excel**: Mendukung unggahan file format `.xlsx` atau `.xls` untuk mengisi dek kartu secara instan.
+* **Penambahan Manual**: Input kartu satu per satu langsung melalui antarmuka aplikasi.
+* **Animasi Pengocokan**: Fitur pengambilan kartu dilengkapi dengan efek visual pengocokan sebelum menampilkan hasil.
+* **Antarmuka Responsif**: Desain yang bersih dan mudah digunakan untuk berbagai perangkat.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Teknologi yang Digunakan
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* **React.js (v19.2.0)**: Framework utama untuk membangun antarmuka pengguna.
+* **XLSX (SheetJS)**: Library untuk memproses dan membaca file Excel.
+* **CSS3**: Digunakan untuk styling dan animasi pengocokan kartu.
 
-### `npm test`
+## Persiapan dan Instalasi
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Langkah-langkah untuk menjalankan proyek ini secara lokal:
 
-### `npm run build`
+1. **Clone repositori:**
+```bash
+git clone https://github.com/username/nama-repo.git
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. **Masuk ke direktori proyek:**
+```bash
+cd cardshuffle
 
-### `npm run eject`
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. **Instal dependensi:**
+```bash
+npm install
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+4. **Jalankan aplikasi:**
+```bash
+npm start
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+Aplikasi akan berjalan di [http://localhost:3000](https://www.google.com/search?q=http://localhost:3000).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Konfigurasi Google Sheets
 
-### Analyzing the Bundle Size
+Agar fitur "Muat dari GSheet" berfungsi dengan baik, pengguna perlu melakukan konfigurasi berikut pada Google Sheet mereka:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. Pastikan data kartu berada di **Kolom A**.
+2. Buka **Extensions > Apps Script** di Google Sheet.
+3. Gunakan kode `doGet` dan pastikan pengaturan **CORS** (`.setHeader()`) telah dikonfigurasi agar mengizinkan akses dari domain luar.
+4. Aktifkan runtime **V8** di Apps Script.
+5. Lakukan **Deploy** sebagai **Web App**.
+6. Atur izin akses ("Who has access") ke **"Anyone"**.
+7. Salin URL Web App yang dihasilkan dan tempelkan ke dalam input aplikasi.
 
-### Making a Progressive Web App
+## Skrip yang Tersedia
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+* `npm start`: Menjalankan aplikasi dalam mode pengembangan.
+* `npm run build`: Membangun aplikasi untuk produksi ke folder `build`.
+* `npm test`: Menjalankan pengujian (test runner).
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Dokumentasi ini dibuat untuk mempermudah pemahaman alur kerja dan fitur yang tersedia dalam proyek **Web Kartu Acak**.

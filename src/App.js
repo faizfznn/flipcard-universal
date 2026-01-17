@@ -1,12 +1,9 @@
-// Impor yang diperlukan (XLSX kembali aktif)
 import React, { useState, useMemo } from 'react';
 import * as XLSX from 'xlsx'; 
 import './App.css'; 
 
-// HAPUS: const GOOGLE_SCRIPT_URL
 
 function App() {
-  // --- STATE ---
   const [masterList, setMasterList] = useState([]);
   const [drawnCards, setDrawnCards] = useState([]);
   const [newCard, setNewCard] = useState(''); 
@@ -14,21 +11,14 @@ function App() {
   const [isShuffling, setIsShuffling] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   
-  // DIUBAH: Loading di-set false, karena tidak ada auto-load
   const [isLoading, setIsLoading] = useState(false);
 
-  // BARU: State untuk menampung URL GSheet dari input pengguna
   const [sheetUrl, setSheetUrl] = useState('');
 
-  // --- DERIVED STATE ---
-  // (Tidak berubah)
   const availableCards = useMemo(() => {
     return masterList.filter(card => !drawnCards.includes(card));
   }, [masterList, drawnCards]);
 
-  // --- FUNGSI ---
-
-  // FUNGSI 1: Fetch dari GSheet (Sekarang dinamis & manual)
   const handleFetchCards = () => {
     if (!sheetUrl.trim()) {
       alert('Silakan masukkan URL Google Sheet Web App Anda.');
@@ -36,13 +26,11 @@ function App() {
     }
 
     setIsLoading(true);
-    // Ambil URL dari state
     fetch(sheetUrl)
       .then(res => res.json())
       .then(data => {
         if (data.status === "success" && data.cards) {
           // Ini adalah Hard Reset
-          setMasterList(data.cards); 
           setDrawnCards([]); 
           alert(`Berhasil memuat ${data.cards.length} kartu dari GSheet.`);
         } else {
@@ -57,9 +45,6 @@ function App() {
       });
   }; 
 
-  // HAPUS: useEffect(() => { fetchCards() }, [fetchCards]);
-
-  // FUNGSI 2: Tambah manual (Tidak berubah)
   const handleAddCard = (e) => {
     e.preventDefault(); 
     if (newCard.trim() !== '') {
@@ -68,7 +53,6 @@ function App() {
     }
   };
 
-  // FUNGSI 3: Upload Excel (Tidak berubah)
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -97,7 +81,6 @@ function App() {
     reader.readAsBinaryString(file);
   };
 
-  // FUNGSI 4: Ambil Kartu (Tidak berubah)
   const handleDrawCard = () => {
     if (availableCards.length === 0) {
       alert('Kartu sudah habis! Silakan muat dek baru.');
@@ -116,19 +99,15 @@ function App() {
     }, 2000); 
   };
 
-  // FUNGSI 5: Tutup popup (Tidak berubah)
   const closePopup = () => {
     setShowPopup(false);
     setTimeout(() => setCurrentCard(null), 300);
   };
 
-  // --- TAMPILAN JSX (Gabungan) ---
   return (
     <div className="App">
       <div className="container">
-        {/* HAPUS: img logoBem */}
         
-        {/* DIUBAH: Judul menjadi universal */}
         <h1>Web Kartu Acak</h1>
 
         {isLoading ? (
@@ -137,7 +116,6 @@ function App() {
           <p className="card-count">Tersisa {availableCards.length} kartu di dek.</p>
         )}
         
-        {/* BARU: Input GSheet Dinamis */}
         <div className="import-section gsheet">
           <label htmlFor="gsheet-url">Muat dek dari Google Sheet:</label>
           <div className="input-form">
@@ -148,14 +126,12 @@ function App() {
               onChange={(e) => setSheetUrl(e.target.value)}
               placeholder="Tempel URL Web App GSheet..."
             />
-            {/* Tombol ini menggunakan style .input-form button */}
             <button onClick={handleFetchCards}>
               Muat
             </button>
           </div>
         </div>
 
-        {/* === AWAL TAMBAHAN PERINGATAN === */}
         <div className="gsheet-warning">
           <h3>Peringatan Penting (Google Sheet)</h3>
           <p>Agar fitur "Muat dari GSheet" berfungsi untuk publik (orang lain), mereka wajib:</p>
@@ -169,10 +145,8 @@ function App() {
             <li>URL Web App hasil deploy adalah yang ditempelkan di atas.</li>
           </ol>
         </div>
-        {/* === AKHIR TAMBAHAN PERINGATAN === */}
 
 
-        {/* DIKEMBALIKAN: Bagian Excel */}
         <div className="import-section">
           <label htmlFor="file-upload">Ganti dek dengan Excel (.xlsx):</label>
           <input
@@ -185,7 +159,6 @@ function App() {
 
         <p className='atau'>atau tambahkan satu per satu ke dek:</p>
         
-        {/* DIKEMBALIKAN: Bagian Manual */}
         <form onSubmit={handleAddCard} className="input-form">
           <input
             type="text"
@@ -196,7 +169,6 @@ function App() {
           <button type="submit">Tambah Kartu</button>
         </form>
 
-        {/* Dek dan Tombol (Tidak berubah) */}
         <div className="deck-container">
           <div className={`deck ${isShuffling ? 'shuffling' : ''} ${availableCards.length === 0 ? 'empty' : ''}`}>
             <div className="card-placeholder"></div>
@@ -214,7 +186,6 @@ function App() {
         </div>
       </div>
 
-      {/* Popup Modal (Tidak berubah) */}
       {showPopup && (
         <div className="popup-overlay" onClick={closePopup}>
           <div className="popup-content" onClick={(e) => e.stopPropagation()}>

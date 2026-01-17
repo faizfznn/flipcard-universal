@@ -1,24 +1,18 @@
-/* Variabel Warna (Design System BEM) */
 :root {
-  /* Warna diambil dari palet logo BEM */
   --primary-red: #D94452;
   --primary-orange: #F39C12;
   --primary-yellow: #F7D851;
   --dark-text: #333333;
-  /* Latar belakang terinspirasi dari tekstur di gambar */
   --light-bg: #FDF8E1; 
 }
-/* --- Perbaikan Peringatan GSheet --- */
 .gsheet-warning {
-  background-color: #fffaf0; /* Warna kuning gading/pucat */
+  background-color: #fffaf0; 
   border: 1px solid var(--primary-orange);
   border-radius: 8px;
-  /* DIUBAH: Padding disesuaikan */
   padding: 16px 24px;
   margin-top: 20px;
-  /* DIUBAH: Teks rata kiri */
   text-align: left;
-  font-size: 0.9rem; /* Sedikit diperbesar agar mudah dibaca */
+  font-size: 0.9rem; 
   color: var(--dark-text);
   line-height: 1.6;
 }
@@ -38,15 +32,13 @@
 }
 
 .gsheet-warning ol {
-  /* DIUBAH: Padding diatur agar nomor masuk ke dalam */
   padding-left: 20px; 
-  /* DIUBAH: Memastikan list-style ada di dalam padding */
   list-style-position: inside; 
   margin: 0;
 }
 
 .gsheet-warning li {
-  margin-bottom: 8px; /* Sedikit ditambah jarak antar list */
+  margin-bottom: 8px; 
 }
 
 .gsheet-warning code {
@@ -54,10 +46,9 @@
   padding: 2px 5px;
   border-radius: 4px;
   font-size: 0.85rem;
-  color: #c7254e; /* Warna merah untuk kode */
+  color: #c7254e;
 }
 
-/* Penyesuaian responsif untuk peringatan di layar kecil */
 @media (max-width: 400px) {
   .gsheet-warning {
     padding: 15px;
@@ -67,7 +58,6 @@
     font-size: 1rem;
   }
 }
-/* Reset dan Font Dasar */
 body {
   font-family: 'Inter', sans-serif;
   background-color: var(--light-bg);
@@ -76,16 +66,14 @@ body {
   padding: 20px;
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Diubah dari center agar tidak aneh di layar tinggi */
+  align-items: flex-start; 
   min-height: 100vh;
 }
 
 .App {
   text-align: center;
   width: 100%;
-  /* DIUBAH: Dibuat lebih lebar untuk tampilan website */
   max-width: 900px; 
-  /* Penambahan margin auto untuk desktop */
   margin: 20px auto; 
 }
 
@@ -108,7 +96,6 @@ h1 {
   margin-top: -10px;
 }
 
-/* Form Input */
 .input-form {
   margin: 25px 0;
   display: flex;
@@ -129,7 +116,6 @@ h1 {
   outline: none;
 }
 
-/* Tombol (Gaya BEM) */
 .input-form button, .draw-button {
   padding: 12px 18px;
   font-family: 'Inter', sans-serif;
@@ -138,7 +124,6 @@ h1 {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  /* Gradient warna logo BEM */
   background-image: linear-gradient(to right, var(--primary-red), var(--primary-orange));
   color: white;
   transition: transform 0.2s, box-shadow 0.2s;
@@ -162,7 +147,6 @@ h1 {
   box-shadow: none;
 }
 
-/* Dek Kartu dan Animasi Shuffle */
 .deck-container {
   margin-top: 30px;
   padding: 20px;
@@ -178,7 +162,6 @@ h1 {
   transition: opacity 0.3s;
 }
 
-/* Tumpukan kartu palsu untuk visual */
 .card-placeholder {
   position: absolute;
   width: 100%;
@@ -187,23 +170,19 @@ h1 {
   border: 2px solid var(--dark-text);
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  /* Beri sedikit rotasi agar terlihat menumpuk */
 }
 
 .card-placeholder:nth-child(1) { transform: rotate(-5deg); }
 .card-placeholder:nth-child(2) { transform: rotate(3deg); }
 .card-placeholder:nth-child(3) { transform: rotate(-2deg); }
 
-/* Jika kartu habis, dek menghilang */
 .deck.empty {
   opacity: 0.3;
 }
 
-/* === Animasi Shuffle BARU (Jitter/Getar Cepat) === */
-/* Hapus keyframes shuffle-1, shuffle-2, shuffle-3 yang lama */
 
 .deck.shuffling .card-placeholder {
-  animation-duration: 0.1s; /* Sangat cepat */
+  animation-duration: 0.1s; 
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
 }
@@ -212,7 +191,7 @@ h1 {
 }
 .deck.shuffling .card-placeholder:nth-child(2) {
   animation-name: jitter-2;
-  animation-delay: 0.02s; /* Sedikit delay agar tidak sinkron */
+  animation-delay: 0.02s; 
 }
 .deck.shuffling .card-placeholder:nth-child(3) {
   animation-name: jitter-3;
@@ -231,10 +210,6 @@ h1 {
   0%, 100% { transform: translate(0, 0) rotate(-2deg); }
   50% { transform: translate(1px, -2px) rotate(-1deg); }
 }
-/* === Akhir Animasi Shuffle BARU === */
-
-
-/* Popup Modal */
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -245,9 +220,8 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Animasi fade-in untuk overlay */
   animation: fadeIn 0.3s;
-  z-index: 100; /* Pastikan di atas segalanya */
+  z-index: 100;
 }
 
 .popup-content {
@@ -259,7 +233,6 @@ h1 {
   width: 90%;
   max-width: 450px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-  /* Animasi scale-up untuk popup */
   animation: scaleUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -290,7 +263,6 @@ h1 {
   line-height: 1.5;
 }
 
-/* Keyframes untuk animasi popup */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -300,7 +272,6 @@ h1 {
   to { transform: scale(1); opacity: 1; }
 }
 
-/* --- Tambahan untuk Impor Excel --- */
 .import-section {
   margin-top: 25px;
   margin-bottom: 15px;
@@ -325,7 +296,6 @@ h1 {
   width: 100%;
 }
 
-/* Style untuk file input button */
 .import-section input[type="file"]::file-selector-button {
   font-family: 'Inter', sans-serif;
   font-weight: 700;
@@ -340,7 +310,7 @@ h1 {
 }
 
 .import-section input[type="file"]::file-selector-button:hover {
-  background-color: #b33642; /* Warna merah lebih gelap */
+  background-color: #b33642;
 }
 
 .atau {
@@ -350,7 +320,6 @@ h1 {
   margin-top: 20px;
 }
 
-/* --- Tambahan untuk GSheet --- */
 .loading-text {
   font-weight: 700;
   color: var(--primary-orange);
@@ -358,14 +327,12 @@ h1 {
   padding: 20px 0;
 }
 
-/* --- Tambahan untuk Input GSheet --- */
 
-/* Beri style pada section GSheet agar mirip Excel */
 .import-section.gsheet {
   margin-top: 25px;
   margin-bottom: 15px;
   background-color: #fcfcfc;
-  border: 2px dashed var(--primary-red); /* Warna beda */
+  border: 2px dashed var(--primary-red); 
   border-radius: 10px;
   padding: 15px;
   text-align: left;
@@ -379,14 +346,10 @@ h1 {
   color: var(--primary-red);
 }
 
-/* Kita pakai .input-form di dalam GSheet, 
-   jadi style input dan button sudah otomatis mirip.
-   Kita hanya perlu hapus margin-top */
 .import-section.gsheet .input-form {
   margin: 0;
 }
 
-/* Hapus tombol refresh GSheet yang lama */
 .refresh-button {
   display: none;
 }
